@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSON Post</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+Name:<input type="text" id="name" value="Amy"/><br/>
+Age:<input type="text" id="age" value="20"/><br/><br/>
+<button id="send">Send to Server</button>
+<button id="createArray">Create Array</button>
+<button id="sendArray">Send Array</button>
+<br/><div id="div1"></div>
+<script>
+    var data = [ ];
+    function execute(){
+        var n = $("#name").val();
+        var a = $("#age").val();
+        var obj = new Object();
+        obj.name = n;
+        obj.age = a;
+        $.post("JsonPostServlet", {"stu":JSON.stringify(obj)}, result);
+    }
+    function result(data){
+        alert(data);
+	}
+    function create(){
+        var n = $("#name").val();
+        var a = $("#age").val();
+        var obj = new Object();
+        obj.name = n;
+        obj.age = a;
+        data.push(obj);
+        alert(JSON.stringify(data));
+    }
+    function sendArr(){
+        var str = JSON.stringify(data);
+        $.post("JsonArrayServlet", {"stuArr":str}, result2);
+    }
+    function result2(msg){
+        $("#div1").html(msg);
+    }
+    function start(){
+        $("#send").click(execute);
+        $("#createArray").click(create);
+        $("#sendArray").click(sendArr);
+    }
+    $(document).ready(start);
+</script>
+</body>
+</html>
