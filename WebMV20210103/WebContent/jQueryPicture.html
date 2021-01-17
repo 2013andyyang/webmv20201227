@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JPG</title>
+</head>
+<body>
+<script src="js/jquery3.5.1.min.js"></script>
+<img id="pic1" src="images/cups.jpg" width="640" height="480"/>
+<script>
+alert("蕭敬騰華麗登上台北跨年晚會，唱到快歌《王妃》，疑似因為太過投入，一個不小心，整個人倒往黑色音箱，瞬間消音8秒鐘，蕭敬騰乾脆躺著唱。");
+var count = 0;
+function result(path){
+	$("#pic1").attr("src", path);
+}
+function change(){
+	count++;
+	$.get("PictureServlet", {"id":count}, result);
+}
+window.setInterval(change , 3000);
+</script>
+</body>
+</html>
